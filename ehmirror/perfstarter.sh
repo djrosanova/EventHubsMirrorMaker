@@ -37,13 +37,9 @@ done
 if [[ ! -z $dest ]]
 then
     DNS=$(parse_dns $dest)
-    PERF_PRODUCER_CONFIG="bootstrap.servers=$DNS:9093\nclient.id=mirror_maker_producer\nrequest.timeout.ms=60000\nsasl.m
-echanism=PLAIN\nsecurity.protocol=SASL_SSL\nsasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule req
-uired username=\"\$ConnectionString\" password=\"$dest\";"
+    PERF_PRODUCER_CONFIG="bootstrap.servers=$DNS:9093\nclient.id=mirror_maker_producer\nrequest.timeout.ms=60000\nsasl.mechanism=PLAIN\nsecurity.protocol=SASL_SSL\nsasl.jaas.config=org.apache.kafka.common.security.plain.PlainLoginModule required username=\"\$ConnectionString\" password=\"$dest\";"
     echo -e $PERF_PRODUCER_CONFIG > perf.producer.config
-
-    kafka-producer-perf-test --topic $topic --record-size $size --producer.config perf.producer.config  --throughpu
-t $rate --num-records $count
+    kafka-producer-perf-test --topic $topic --record-size $size --producer.config perf.producer.config  --throughput $rate --num-records $count
 else
     echo "missing -d destinaton connection string, use -h for help"
 fi
