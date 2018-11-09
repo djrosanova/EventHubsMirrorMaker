@@ -42,7 +42,7 @@ echanism=PLAIN\nsecurity.protocol=SASL_SSL\nsasl.jaas.config=org.apache.kafka.co
 uired username=\"\$ConnectionString\" password=\"$dest\";"
     echo -e $PERF_PRODUCER_CONFIG > perf.producer.config
 
-    ./kafka-producer-perf-test.sh --topic $topic --record-size $size --producer.config perf.producer.config  --throughpu
+    ./kafka-producer-perf-test --topic $topic --record-size $size --producer.config perf.producer.config  --throughpu
 t $rate --num-records $count
 else
     echo "missing -d destinaton connection string, use -h for help"
