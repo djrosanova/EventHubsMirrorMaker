@@ -23,11 +23,13 @@ Create a container instance to host Mirror Maker. It will see the topic that the
 ```
 
 You can see the details from the mirror maker container with this command.
-```az container show --resource-group $rgname --name mirrormaker
+```
+az container show --resource-group $rgname --name mirrormaker
 ```
 
 Take a look at the logs from the container.
-```az container logs --resource-group $rgname --name mirrormaker
+```
+az container logs --resource-group $rgname --name mirrormaker
 az container logs --resource-group $rgname --name loadgenerator 
 ```
 Clean up all your stuff.
