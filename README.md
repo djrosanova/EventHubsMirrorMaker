@@ -40,4 +40,5 @@ Clean up all your stuff.
 ```
 az container delete --resource-group $rgname --name mirrormaker
 az container delete --resource-group $rgname --name loadgenerator 
+az group delete --name $rgname
 ```
