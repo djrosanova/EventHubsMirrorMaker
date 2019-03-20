@@ -2,11 +2,11 @@
 This sample uses Azure Event Hubs Kafka MirrorMaker running on an Azure Container Instance and then it creates a second container as a load generator. Use the Cloud Shell in the Azure portal to give this a try. This will also work from bash if you have the Azure CLI installed.
 
 ## Setup a few variables to make your life infinitely easier
-rgname=mmrg$RANDOM
+```rgname=mmrg$RANDOM
 az group create --name $rgname --location westus
 SOURCE=myehkafkasource$RANDOM
 DEST=myehkafkadest$RANDOM
-
+```
 ## Create two Azure Event Hubs and get the connection strings
 
 ```az eventhubs namespace create --name $SOURCE --resource-group $rgname -l westus --enable-kafka true
@@ -23,7 +23,8 @@ Create a container instance to host Mirror Maker. It will see the topic that the
 ```
 
 You can see the details from the mirror maker container with this command.
-`az container show --resource-group $rgname --name mirrormaker`
+```az container show --resource-group $rgname --name mirrormaker
+```
 
 Take a look at the logs from the container.
 ```az container logs --resource-group $rgname --name mirrormaker
