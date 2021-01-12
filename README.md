@@ -18,12 +18,12 @@ DEST_CON_STR=$(az eventhubs namespace authorization-rule keys list --resource-gr
 ```
 Create a container instance to run the built in Kafka perf test sender. The credentials are injected into the container as environment variables. Check out /ehmirror/perfstarter.sh for more details. The same pattern is used for the MirrorMaker container.
 ```
-az container create --resource-group $rgname --name loadgenerator --image confluentinc/cp-kafka --gitrepo-url https://github.com/djrosanova/EventHubsMirrorMaker --gitrepo-mount-path /mnt/EventHubsMirrorMaker --command-line "/bin/bash ./mnt/EventHubsMirrorMaker/ehmirror/perfstarter.sh -d $SOURCE_CON_STR" --restart-policy OnFailure --environment-variables SOURCE_CON_STR="$SOURCE_CON_STR" 
+az container create --resource-group $rgname --name loadgenerator --image confluentinc/cp-kafka --gitrepo-url https://github.com/djrosanova/EventHubsMirrorMaker --gitrepo-mount-path /mnt/EventHubsMirrorMaker --command-line "/bin/bash /mnt/EventHubsMirrorMaker/ehmirror/perfstarter.sh -d $SOURCE_CON_STR" --restart-policy OnFailure --environment-variables SOURCE_CON_STR="$SOURCE_CON_STR" 
 ```
 
 Create a container instance to host Mirror Maker. It will see the topic that the above perf container is sending data to and copy it to the second Event Hub / topic. 
 ```
-az container create --resource-group $rgname --name mirrormaker --image confluentinc/cp-kafka --gitrepo-url https://github.com/djrosanova/EventHubsMirrorMaker --gitrepo-mount-path /mnt/EventHubsMirrorMaker --command-line "/bin/bash ./mnt/EventHubsMirrorMaker/ehmirror/mirrorstart.sh " --environment-variables SOURCE_CON_STR="$SOURCE_CON_STR" DEST_CON_STR="$DEST_CON_STR"
+az container create --resource-group $rgname --name mirrormaker --image confluentinc/cp-kafka --gitrepo-url https://github.com/djrosanova/EventHubsMirrorMaker --gitrepo-mount-path /mnt/EventHubsMirrorMaker --command-line "/bin/bash /mnt/EventHubsMirrorMaker/ehmirror/mirrorstart.sh " --environment-variables SOURCE_CON_STR="$SOURCE_CON_STR" DEST_CON_STR="$DEST_CON_STR"
 ```
 
 You can see the details from the mirror maker container with this command.
